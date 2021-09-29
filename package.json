@@ -1,0 +1,19 @@
+{
+  "name": "diarioescolar",
+  "version": "1.0.0",
+  "description": "Sistema unificado de registro de aulas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Abimaelr/diario.git"
+  },
+  "author": "Abimael Rocha de Albuquerque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abimaelr/diario/issues"
+  },
+  "homepage": "https://github.com/Abimaelr/diario#readme"
+}
