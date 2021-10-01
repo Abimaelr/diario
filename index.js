@@ -8,9 +8,9 @@ const app = express();
 app.use(express.json());
 
 app.use('/login', login);
-app.use('/unidade', unidade);
+app.use('/', unidade);
 
-const port = 4000;
+const port = 3000;
 
 app.listen(port , ()=>{
     console.log('Ativo')
