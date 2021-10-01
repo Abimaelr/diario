@@ -1,9 +1,14 @@
 const { findUser } = require("../models/user");
 
-const find = async (userId, password) => {
+const find = async (userId, pass) => {
     const user = await findUser(userId);
-    if(user.password !== password ) return false;
-    return user;
+    try {
+        if(user.password === password ) return user;
+
+    } catch (_err) {
+        return user;
+    }
+
 }
 
 module.exports = {
