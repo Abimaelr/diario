@@ -1,8 +1,19 @@
-const { classesBySchool, classesByCode, teachers, students, classes, teachersId, updatePass } = require("../models/dashboard");
+const { classesBySchool, classesByCode, teachers, students, classes, teachersId, updatePass, createClass } = require("../models/dashboard");
 
 const findClasses = async (userId) => {
     const classArr = await classesBySchool(userId);
     return classArr;
+}
+
+const getClassId = async (codTurma) => {
+    const result = await classesByCode(codTurma);
+    return result;
+}
+
+const createNewClass = async (codEscola, codTurma, nomeTurma, turno) => {
+    const result = await createClass(codEscola, codTurma, nomeTurma, turno);
+
+    return result;
 }
 
 const findTeachers = async (userId) => {
@@ -58,6 +69,9 @@ module.exports = {
     findClasses,
     findTeachers,
     studentsBySchool,
+    studentsByClass,
     classByTeacher,
-    changePass
+    changePass,
+    getClassId,
+    createNewClass
 }

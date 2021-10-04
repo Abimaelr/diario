@@ -48,6 +48,14 @@ const classes = async () => {
     return out;
 };
 
+const createClass = async (codTurma, nomeTurma, turno, codEscola) => {
+    const out = await connect()
+        .then((db) => db.collection('classes')
+        .insertOne({codEscola, codTurma, nomeTurma, turno, diarios: [], boletim: [], visible: 1}))
+        .then((result) => result.ops);
+    return out;
+};
+
 const students = async () => {
     const out = await connect()
         .then((db) => db.collection('alunos')
@@ -71,5 +79,6 @@ module.exports = {
     classesByCode,
     classes,
     teachersId,
-    updatePass
+    updatePass,
+    createClass
 }

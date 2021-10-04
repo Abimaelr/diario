@@ -7,7 +7,6 @@ const validateToken = (req, res, next) => {
     const { authorization } = req.headers;
     try {
         const verify = jwt.verify(authorization, pass);
-        // if(!verify) return res.status(500).json({message:'Faça login para continuar!'})
     } catch (err) {
          return res.status(500).json({message:'Faça login para continuar!'})
     }
@@ -21,6 +20,7 @@ const validateUser = async (req, res, next) => {
         const verify = jwt.verify(authorization, pass);
         const { userId, password } = verify;
         const log = await find(userId);
+        console.log(log)
         if(!log || log.password !== password) return res.status(400).send({ message: "id ou senha inválidos!" });
     } catch (err) {
        return res.status(500).json({message:'Faça login para continuar!'})
