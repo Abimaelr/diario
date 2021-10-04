@@ -15,12 +15,10 @@ const validateToken = (req, res, next) => {
 
 const validateUser = async (req, res, next) => {
     const { authorization } = req.headers;
-    
     try {
         const verify = jwt.verify(authorization, pass);
         const { userId, password } = verify;
         const log = await find(userId);
-        console.log(log)
         if(!log || log.password !== password) return res.status(400).send({ message: "id ou senha inválidos!" });
     } catch (err) {
        return res.status(500).json({message:'Faça login para continuar!'})
