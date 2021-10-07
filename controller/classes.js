@@ -1,5 +1,6 @@
 const { findClasses, findTeachers, studentsBySchool, changePass, createNewClass} = require("../services/dashboard")
 const jwt = require('jsonwebtoken');
+const { editClassId } = require("../services/classes");
 const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
 
 
@@ -23,11 +24,21 @@ const createClasse = async (req, res) => {
 
     const create = await createNewClass(userId, codTurma, nomeTurma, turno);
     
-    return res.status(200).json({create})
+    return res.status(201).json({create})
+}
+
+const editClass = async (req, res) => {
+    const { id } = req.params;
+    const { nomeTurma, turno} = req.body;
+
+    const edit = await editClassId(id, nomeTurma, turno);
+
+    return res.status(201).json({edit})
 }
 
 
 module.exports = {
     classes,
-    createClasse
+    createClasse,
+    editClass
 }

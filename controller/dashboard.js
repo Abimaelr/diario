@@ -41,7 +41,7 @@ const createClasse = async (req, res) => {
     const { userId } = verify;
 
     const create = await createNewClass(userId, codTurma, nomeTurma, turno);
-
+    
     return res.status(200).json({create})
 }
 

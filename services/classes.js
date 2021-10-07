@@ -1,4 +1,4 @@
-const { classesBySchool, classesByCode, students, classes, teachersId, createClass } = require("../models/classes");
+const { classesBySchool, classesByCode, students, classes, teachersId, createClass, editClass } = require("../models/classes");
 
 const findClasses = async (userId) => {
     const classArr = await classesBySchool(userId);
@@ -14,17 +14,6 @@ const createNewClass = async (codEscola, codTurma, nomeTurma, turno) => {
     const result = await createClass(codEscola, codTurma, nomeTurma, turno);
 
     return result;
-}
-
-const studentsBySchool = async (userId) => {
-    const classArr = await classesBySchool(userId);
-    const allStudents = await students();
-
-    const studentsArr = allStudents.filter( student => {
-        if(classArr.map(({codTurma}) => codTurma).includes(student.codTurma)) {
-            return student
-        }
-    })
 }
 
 const studentsByClass = async (codTurma) => {
@@ -50,12 +39,17 @@ const classByTeacher = async (profId) => {
     return out;
 }
 
+const editClassId = async (classId, nome, turno) => {
+    const classe = await editClass(classId, nome, turno);
+    return classe;
+}
+
 
 module.exports = {
     findClasses,
-    studentsBySchool,
     studentsByClass,
     classByTeacher,
     getClassId,
-    createNewClass
+    createNewClass,
+    editClassId
 }

@@ -2,7 +2,7 @@ const connect = require('./connect');
 
 const teachersId = async (profId) => {
     const out = await  connect()
-    .then((db) => db.collection('professores')
+    .then((db) => db.collection('users')
     .findOne({profId}))
     .then((result) => result);
     return out;
@@ -19,7 +19,7 @@ const classesBySchool = async (codEscola) => {
 const classesByCode = async (codTurma) => {
     const out = await connect()
         .then((db) => db.collection('classes')
-        .find({ codTurma }).toArray())
+        .findOne({ codTurma }))
         .then((result) => result);
     return out;
 };
@@ -40,6 +40,14 @@ const createClass = async (codTurma, nomeTurma, turno, codEscola) => {
     return out;
 };
 
+const editClass = async (codTurma, nomeTurma, turno) => {
+    const out = await connect()
+    .then((db) => db.collection('classes')
+    .updateOne({ codTurma },{ $set: { nomeTurma, turno }}))
+    .then((result) => result);
+    return out;
+}
+
 const students = async () => {
     const out = await connect()
         .then((db) => db.collection('alunos')
@@ -49,5 +57,5 @@ const students = async () => {
 };
 
 module.exports = {
-    classesBySchool, classesByCode, students, classes, teachersId, createClass 
+    classesBySchool, classesByCode, students, classes, teachersId, createClass, editClass
 }

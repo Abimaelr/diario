@@ -10,15 +10,15 @@ const connect = require('./connect');
 
 const teachers = async (userId) => {
     const out = await  connect()
-    .then((db) => db.collection('professores')
-    .find({}).toArray())
+    .then((db) => db.collection('users')
+    .find({permissions: 'p'}).toArray())
     .then((result) => result);
     return out;
     };
 
 const teachersId = async (profId) => {
     const out = await  connect()
-    .then((db) => db.collection('professores')
+    .then((db) => db.collection('users')
     .findOne({profId}))
     .then((result) => result);
     return out;
@@ -35,7 +35,7 @@ const classesBySchool = async (codEscola) => {
 const classesByCode = async (codTurma) => {
     const out = await connect()
         .then((db) => db.collection('classes')
-        .find({ codTurma }).toArray())
+        .findOne({ codTurma }))
         .then((result) => result);
     return out;
 };
