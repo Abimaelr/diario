@@ -10,7 +10,7 @@ const create = async (boletim) => {
     return out;
     };
 
-const read = async (idTurma, data, materia, bimestre,) => {
+const read = async ({idTurma, data, materia, bimestre}) => {
     const out = await  connect()
     .then((db) => db.collection('boletins')
     .find({data, idTurma, bimestre, materia}).toArray())
@@ -18,7 +18,7 @@ const read = async (idTurma, data, materia, bimestre,) => {
     return out;
     };
 
-const update = async (idTurma, data, materia, bimestre, nota, lastModified) => {
+const update = async ({idTurma, data, materia, bimestre, nota, lastModified}) => {
     const out = await  connect()
     .then((db) => db.collection('boletins')
     .update({ idTurma, materia, data, bimestre },{ $set: { lastModified, nota, obs }}))
@@ -26,7 +26,7 @@ const update = async (idTurma, data, materia, bimestre, nota, lastModified) => {
     return out;
     };
 
-const readOne = async (codAluno, idTurma, data, materia, bimestre) => {
+const readOne = async ({codAluno, idTurma, data, materia, bimestre}) => {
     const out = await  connect()
     .then((db) => db.collection('boletins')
     .findOne({codAluno, idTurma, materia, data, bimestre}).toArray())
@@ -34,7 +34,7 @@ const readOne = async (codAluno, idTurma, data, materia, bimestre) => {
     return out;
     };
 
-const updateOne = async (codAluno, idTurma, data, materia, bimestre, nota, lastModified) => {
+const updateOne = async ({codAluno, idTurma, data, materia, bimestre, nota, lastModified}) => {
     const out = await  connect()
     .then((db) => db.collection('boletins')
     .updateOne({codAluno, idTurma, materia, data, bimestre},{ $set: { lastModified, nota, obs }}))
