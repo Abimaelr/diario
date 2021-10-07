@@ -5,7 +5,8 @@ const { getClassId } = require("../services/classes");
 const verifyClasses = async (req, res, next) => {
     const { codTurma } =  req.body;
     const turma = await getClassId(codTurma);
-    if(turma !== []) return res.status(500).json({ message: "Essa turma já existe!" });
+    console.log(turma)
+    if(turma) return res.status(500).json({ message: "Essa turma já existe!" });
     next();
 }
 

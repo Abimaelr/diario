@@ -8,6 +8,15 @@ const findUser = async (userId) => {
     return out;
     };
 
+const edit = async ({userId, disciplinas}) => {
+    const out = await connect()
+        .then((db) => db.collection('users')
+        .updateOne({userId},{ $set: { disciplinas }}))
+        .then((result) => result);
+    return out;
+    };
+
 module.exports = {
     findUser,
+    edit
 }
