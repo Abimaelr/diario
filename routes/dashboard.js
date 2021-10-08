@@ -37,14 +37,4 @@ router.route('/classes/:id')
         classes
     )
 
-router.route('/professor/')
-    .get()
-
-
-router.route('/professor/:id')
-    .get()
-
-router.route('/turma')
-    .get()
-
 module.exports = router;

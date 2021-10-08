@@ -19,6 +19,9 @@ router.route('/')
         createClasse
     )
 router.route('/:id')
+    .get(
+        
+    )
     .put(
         validateToken,
         validateUser,

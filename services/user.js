@@ -1,18 +1,21 @@
 const { findUser, edit } = require("../models/user");
 
-const find = async (userId, password) => {
+const find = async (userId) => {
     const user = await findUser(userId);
-    try {
-        if(user.password === password ) return user;
-
-    } catch (_err) {
-        return user;
-    }
+    return user;
 }
 
 const editDisciplinas = async ({userId, disciplinas}) => {
     return await edit({userId, disciplinas});
 }
+
+const getDisciplinas = async (userId) => {
+    const user = await findUser(userId);
+
+    return user;
+}
+
+getDisciplinas('angela.csilva@professor.joaopessoa.pb.gov.br')
 
 module.exports = {
     find,

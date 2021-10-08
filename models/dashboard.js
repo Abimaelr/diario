@@ -16,10 +16,10 @@ const teachers = async (userId) => {
     return out;
     };
 
-const teachersId = async (profId) => {
+const teachersId = async (userId) => {
     const out = await  connect()
     .then((db) => db.collection('users')
-    .findOne({profId}))
+    .findOne({userId}))
     .then((result) => result);
     return out;
     };

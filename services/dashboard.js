@@ -53,6 +53,7 @@ const studentsByClass = async (codTurma) => {
 const classByTeacher = async (profId) => {
     const prof = await teachersId(profId);
     const classArr = await classes();
+   
     const out = classArr.filter( sala => {
         if(prof.turmas.includes(sala.codTurma)) {
             return sala
