@@ -6,7 +6,7 @@ const permissionsDisciplinas = async (req, res, next) => {
     const { authorization } = req.headers;
     const body = req.body;
     const { permissions, userId } = jwt.verify(authorization, pass);
-    console.log(body.userId === userId)
+    console.log(body.userId)
     if (!(permissions === 'd' || userId === body.userId)) return res.status(401).json({ message: "Você não possui permissões!" })
     next();
 }

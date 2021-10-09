@@ -5,7 +5,7 @@ const connect = require('./connect');
 const create = async (boletim) => {
     const out = await  connect()
     .then((db) => db.collection('boletins')
-    .insert(boletim))
+    .insertMany(boletim))
     .then((result) => result);
     return out;
     };
