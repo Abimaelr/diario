@@ -1,7 +1,7 @@
 const express = require('express');
 const { edit, read, readAllClasses, writeFreq } = require('../controller/disciplinas');
 const { validateToken, validateUser } = require('../microservices/token');
-const { permissionsDisciplinas, permissionsDisciplina, verifyConsistencia} = require('../microservices/user');
+const { permissionsDisciplinas, permissionsDisciplina, verifyConsistencia, verifyExists} = require('../microservices/user');
 
 
 const router = express.Router();
@@ -25,6 +25,7 @@ router.route('/diarios')
     .post(
         permissionsDisciplina, 
         verifyConsistencia,
+        verifyExists,
         writeFreq
     );
 
