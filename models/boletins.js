@@ -10,10 +10,10 @@ const create = async (boletim) => {
     return out;
     };
 
-const read = async ({idTurma, data, materia, bimestre}) => {
+const read = async (query) => {
     const out = await  connect()
     .then((db) => db.collection('boletins')
-    .find({data, idTurma, bimestre, materia}).toArray())
+    .find(query).toArray())
     .then((result) => result);
     return out;
     };

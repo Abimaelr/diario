@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
-// const { create } = require('../models/diarios');
-// const { classByTeacher } = require('../services/dashboard');
+
 const user = require('../services/user')
 
 const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
@@ -41,6 +40,13 @@ const editFrequ = async (req, res) => {
     return res.status(200).json({ result });
 }
 
+const readBol = async (req, res) => {
+    const query = req.body;
+    const result = await user.readBoletim(query);
+
+    return res.status(200).json({ result });
+}
+
 const writeBol = async (req, res) => {
     const boletim = await req.body;
     console.log(boletim)
@@ -64,5 +70,6 @@ module.exports = {
     writeFreq,
     editFrequ,
     writeBol,
-    editBol
+    editBol,
+    readBol
 }

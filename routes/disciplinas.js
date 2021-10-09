@@ -1,5 +1,5 @@
 const express = require('express');
-const { edit, read, writeFreq, editFrequ, writeBol, readDiarios } = require('../controller/disciplinas');
+const { edit, read, writeFreq, editFrequ, writeBol, readDiarios, readBol } = require('../controller/disciplinas');
 const { validateToken, validateUser } = require('../microservices/token');
 const { permissionsDisciplinas, permissionsDisciplina, verifyConsistencia, verifyExists, permissionsRead} = require('../microservices/user');
 
@@ -38,7 +38,7 @@ router.route('/diarios')
 router.route('/boletins')
     .get(
         permissionsRead,
-        readDiarios
+        readBol
     )
     .post(
         permissionsDisciplina,
@@ -47,8 +47,7 @@ router.route('/boletins')
         writeBol
     ).put(
         permissionsDisciplina, 
-        verifyConsistencia,
-        
+        verifyConsistencia,  
     );
 
 module.exports = router;
