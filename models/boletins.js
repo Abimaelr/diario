@@ -42,10 +42,19 @@ const updateOne = async ({codAluno, idTurma, data, materia, bimestre, nota, last
     return out;
     };
 
+const remove = async (query) => {
+        const out = await  connect()
+        .then((db) => db.collection('boletins')
+        .deleteMany(query))
+        .then((result) => result);
+        return out;
+    }
+
 module.exports = {
     create,
     read,
     readOne,
     update,
-    updateOne
+    updateOne,
+    remove
 }

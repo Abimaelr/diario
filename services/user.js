@@ -1,4 +1,5 @@
 const { create, read, update, remove } = require("../models/diarios");
+const boletim = require("../models/boletins");
 const { findUser, edit } = require("../models/user");
 const find = async (userId) => {
     const user = await findUser(userId);
@@ -25,8 +26,24 @@ const readFreq = async (pack) => {
 }
 
 const editFreq = async (remv, pack) => {
-    const rem = await remove(remv);
+    await remove(remv);
     const result = await create(pack);
+    return result;
+}
+
+const writeBoletim = async (pack) => {
+    const result = await boletim.create(pack);
+    return result;
+}
+
+const readBoletim = async (pack) => {
+    const result = await boletim.read(pack);
+    return result;
+}
+
+const editBoletim = async (remv, pack) => {
+    await boletim.remove(remv);
+    const result = await boletim.create(pack);
     return result;
 }
 
@@ -37,5 +54,8 @@ module.exports = {
     getDisciplinas,
     writeFreq,
     readFreq,
-    editFreq
+    editFreq,
+    writeBoletim,
+    readBoletim,
+    editBoletim
 }
