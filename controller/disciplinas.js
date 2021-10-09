@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { create } = require('../models/diarios');
 const { classByTeacher } = require('../services/dashboard');
-const { editDisciplinas, find, readFreq } = require("../services/user");
+const { editDisciplinas, find, readFreq, editFreq } = require("../services/user");
 const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
 
 const read = async ( req, res) => {
@@ -32,10 +32,19 @@ const writeFreq = async (req, res) => {
     return res.status(200).json({ result });
 }
 
+const editFrequ = async (req, res) => {
+    const frequencias = await req.body;
+    const { idTurma, idProfessor, data, materia} = frequencias.pack[0];
+    const query = { idTurma, idProfessor, data, materia } ;
+    const result = await editFreq(query, frequencias.pack);
+    return res.status(200).json({ result });
+}
+
 
 module.exports = {
     edit,
     read,
     readAllClasses,
-    writeFreq
+    writeFreq,
+    editFrequ
 }

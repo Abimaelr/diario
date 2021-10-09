@@ -1,4 +1,4 @@
-const { create, read } = require("../models/diarios");
+const { create, read, update, remove } = require("../models/diarios");
 const { findUser, edit } = require("../models/user");
 const find = async (userId) => {
     const user = await findUser(userId);
@@ -24,11 +24,18 @@ const readFreq = async (pack) => {
     return result;
 }
 
+const editFreq = async (remv, pack) => {
+    const rem = await remove(remv);
+    const result = await create(pack);
+    return result;
+}
+
 
 module.exports = {
     find,
     editDisciplinas,
     getDisciplinas,
     writeFreq,
-    readFreq
+    readFreq,
+    editFreq
 }

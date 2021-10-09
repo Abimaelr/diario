@@ -18,7 +18,7 @@ const read = async (query) => {
     return out;
     };
 
-const update = async ({idTurma, data, materia, bimestre, presenca, lastModified}) => {
+const update = async (idTurma, data, materia, bimestre, presenca, lastModified) => {
     const out = await  connect()
     .then((db) => db.collection('diarios')
     .update({ idTurma, materia, data, bimestre },{ $set: { lastModified, presenca, obs }}))
@@ -42,10 +42,19 @@ const updateOne = async ({codAluno, idTurma, data, materia, bimestre, presenca, 
     return out;
     };
 
+const remove = async (query) => {
+    const out = await  connect()
+    .then((db) => db.collection('diarios')
+    .deleteMany(query))
+    .then((result) => result);
+    return out;
+}
+
 module.exports = {
     create,
     read,
     readOne,
     update,
-    updateOne
+    updateOne,
+    remove
 }
