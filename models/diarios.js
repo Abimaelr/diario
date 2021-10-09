@@ -5,7 +5,7 @@ const connect = require('./connect');
 const create = async (diario) => {
     const out = await  connect()
     .then((db) => db.collection('diarios')
-    .insert(diario))
+    .insertMany(diario))
     .then((result) => result);
     return out;
     };

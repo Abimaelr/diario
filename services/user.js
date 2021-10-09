@@ -1,5 +1,5 @@
+const { create } = require("../models/diarios");
 const { findUser, edit } = require("../models/user");
-
 const find = async (userId) => {
     const user = await findUser(userId);
     return user;
@@ -11,13 +11,19 @@ const editDisciplinas = async ({userId, disciplinas}) => {
 
 const getDisciplinas = async (userId) => {
     const user = await findUser(userId);
-
     return user;
 }
 
-getDisciplinas('angela.csilva@professor.joaopessoa.pb.gov.br')
+const writeFreq = async (pack) => {
+    const result = await create(pack);
+    return result;
+}
+
+
 
 module.exports = {
     find,
-    editDisciplinas
+    editDisciplinas,
+    getDisciplinas,
+    writeFreq
 }
