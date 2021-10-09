@@ -1,27 +1,29 @@
-const { create, read, update, remove } = require("../models/diarios");
+const diarios = require("../models/diarios");
 const boletim = require("../models/boletins");
-const { findUser, edit } = require("../models/user");
+const user = require("../models/user");
+
 const find = async (userId) => {
-    const user = await findUser(userId);
-    return user;
+    const result = await user.findUser(userId);
+    return result;
 }
 
 const editDisciplinas = async ({userId, disciplinas}) => {
-    return await edit({userId, disciplinas});
+    return await user.edit({userId, disciplinas});
 }
 
 const getDisciplinas = async (userId) => {
-    const user = await findUser(userId);
-    return user;
+    const result = await user.findUser(userId);
+    return result;
 }
 
 const writeFreq = async (pack) => {
-    const result = await create(pack);
+
+    const result = await diarios.create(pack);
     return result;
 }
 
 const readFreq = async (pack) => {
-    const result = await read(pack);
+    const result = await diarios.read(pack);
     return result;
 }
 

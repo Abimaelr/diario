@@ -21,6 +21,16 @@ const permissionsDisciplina = async (req, res, next) => {
     next();
 }
 
+const permissionsRead = async (req, res, next) => {
+    const { authorization } = req.headers;
+    const query = req.body;
+    const { userId } = jwt.verify(authorization, pass);
+    const { disciplinas, turmas, profId } = await find(userId);
+    if (!disciplinas.includes(query.materia) ||  !turmas.includes(query.idTurma)|| profId !== query.idProfessor)
+        return res.status(401).json({ message: "Você não possui permissões para acessar essa turma!" })
+    next();
+}
+
 const verifyConsistencia = async (req, res, next) => {
     const { pack } = req.body;
     const idTurma = pack.map(({idTurma}) => idTurma);
@@ -47,6 +57,7 @@ const verifyExists = async (req, res, next) => {
 module.exports = {
     permissionsDisciplinas,
     permissionsDisciplina,
+    permissionsRead,
     verifyConsistencia,
     verifyExists
 }
