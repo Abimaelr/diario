@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const login = require('./routes/login');
 const dashboard = require('./routes/dashboard');
@@ -8,6 +9,7 @@ const disciplinas = require('./routes/disciplinas');
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use('/login', login);
 app.use('/', dashboard);

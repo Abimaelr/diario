@@ -14,9 +14,9 @@ const permissionsDisciplinas = async (req, res, next) => {
 const permissionsDisciplina = async (req, res, next) => {
     const { authorization } = req.headers;
     const { pack } = req.body;
-    const { userId } = jwt.verify(authorization, pass);
+    const { userId, permissions } = jwt.verify(authorization, pass);
     const { disciplinas, turmas, profId } = await find(userId);
-    if (!disciplinas.includes(pack[0].materia) ||  !turmas.includes(pack[0].idTurma)|| profId !== pack[0].idProfessor)
+    if (!disciplinas.includes(pack[0].materia) ||  !turmas.includes(pack[0].idTurma)|| profId !== pack[0].idProfessor || permissions === 'd')
         return res.status(401).json({ message: "Você não possui permissões para acessar essa turma!" })
     next();
 }
@@ -24,9 +24,10 @@ const permissionsDisciplina = async (req, res, next) => {
 const permissionsRead = async (req, res, next) => {
     const { authorization } = req.headers;
     const query = req.body;
-    const { userId } = jwt.verify(authorization, pass);
+    const { userId, permissions } = jwt.verify(authorization, pass);
     const { disciplinas, turmas, profId } = await find(userId);
-    if (!disciplinas.includes(query.materia) ||  !turmas.includes(query.idTurma)|| profId !== query.idProfessor)
+    if (!disciplinas.includes(query.materia) ||  !turmas.includes(query.idTurma)|| profId !== query.idProfessor || 
+    permissions === 'd')
         return res.status(401).json({ message: "Você não possui permissões para acessar essa turma!" })
     next();
 }

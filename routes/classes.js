@@ -1,5 +1,5 @@
 const express = require('express');
-const { classes, createClasse, editClass } = require('../controller/classes');
+const { classes, createClasse, editClass, classByTeacher } = require('../controller/classes');
 const { verifyClasses, verifyPermissionCreate, verifyPermission } = require('../microservices/classes');
 const { validateToken, validateUser } = require('../microservices/token');
 
@@ -18,15 +18,22 @@ router.route('/')
         verifyPermissionCreate,
         createClasse
     )
-router.route('/:id')
-    .get(
-        
-    )
-    .put(
+
+    router.route('/p/')
+        .get(
         validateToken,
         validateUser,
-        verifyPermission,
-        editClass
+        classByTeacher
     )
+// router.route('/:id')
+//     .get(
+        
+//     )
+//     .put(
+//         validateToken,
+//         validateUser,
+//         verifyPermission,
+//         editClass
+//     )
 
 module.exports = router;

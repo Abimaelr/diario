@@ -17,24 +17,24 @@ router.route('/')
         updatePassword
     );
 
-router.route('/classes')
-        .get(
-            validateToken,
-            validateUser,
-            classes
-        )
-        .post(
-            validateToken,
-            validateUser,
-            verifyClasses,
-            verifyPermissionCreate,
-            createClasse
-        )
-router.route('/classes/:id')
-    .get(
-        validateToken,
-        validateUser,
-        classes
-    )
+// router.route('/classes')
+//         .get(
+//             validateToken,
+//             validateUser,
+//             classes
+//         )
+//         .post(
+//             validateToken,
+//             validateUser,
+//             verifyClasses,
+//             verifyPermissionCreate,
+//             createClasse
+//         )
+// router.route('/classes/:id')
+//     .get(
+//         validateToken,
+//         validateUser,
+//         classes
+//     )
 
 module.exports = router;
