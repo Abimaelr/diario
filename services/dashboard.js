@@ -1,4 +1,4 @@
-const { classesBySchool, classesByCode, teachers, students, classes, teachersId, updatePass, createClass } = require("../models/dashboard");
+const { classesBySchool, classesByCode, teachers, classes, teachersId, updatePass, createClass, students } = require("../models/dashboard");
 
 const findClasses = async (userId) => {
     const classArr = await classesBySchool(userId);
@@ -38,15 +38,26 @@ const studentsBySchool = async (userId) => {
     })
 }
 
-const studentsByClass = async (codTurma) => {
-    const classArr = await classesByCode(codTurma);
-    const allStudents = await students();
+// const studentsByClass = async (codTurma) => {
+//     const classArr = await classesByCode(codTurma);
+//     const allStudents = await students();
+//     try{
+//         const studentsArr = allStudents.filter( student => {
+//             if(classArr.map(({codTurma}) => codTurma).includes(student.codTurma)) {
+//                 console.log(student)
+//                 return student
+//             }
+//         })
+//         console.log(studentsArr)
+//         return studentsArr;
+//     }
+//     catch{
+//         return false;
+//     }
+// }
 
-    const studentsArr = allStudents.filter( student => {
-        if(classArr.map(({codTurma}) => codTurma).includes(student.codTurma)) {
-            return student
-        }
-    })
+const studentsByClass = async ({codTurma}) => {
+    const studentsArr = await students({codTurma});
     return studentsArr;
 }
 

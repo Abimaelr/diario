@@ -48,10 +48,10 @@ const createClass = async (codTurma, nomeTurma, turno, codEscola) => {
     return out;
 };
 
-const students = async () => {
+const students = async (query = { }) => {
     const out = await connect()
         .then((db) => db.collection('alunos')
-        .find({ }).toArray())
+        .find(query).sort({"nomeCompleto": 1}).toArray())
         .then((result) => result);
     return out;
 };

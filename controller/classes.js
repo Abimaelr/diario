@@ -1,4 +1,4 @@
-const { findClasses, findTeachers, studentsBySchool, changePass, createNewClass} = require("../services/dashboard")
+const { findClasses, findTeachers, studentsBySchool, changePass, createNewClass, studentsByClass} = require("../services/dashboard")
 const jwt = require('jsonwebtoken');
 const services = require("../services/classes");
 const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
@@ -43,10 +43,18 @@ const classByTeacher = async (req, res) => {
     res.status(200).json({ classes })
 }
 
+const studentsClass = async (req, res) => {
+    const { id } = req.params; 
+    const students = await studentsByClass({codTurma: id})
+
+    return res.status(200).json({ students })
+}
+
 
 module.exports = {
     classes,
     createClasse,
     editClass,
-    classByTeacher
+    classByTeacher,
+    studentsClass
 }
