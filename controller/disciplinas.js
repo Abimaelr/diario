@@ -18,10 +18,11 @@ const edit = async (req, res) => {
 }
 
 const readDiarios = async (req, res) => {
-    const { authorization } = req.headers;
-    const { userId } = jwt.verify(authorization, pass);
-    const query = req.body;
-    const result = await user.readFreq(query);
+    // const { authorization } = req.headers;
+    // const { userId } = jwt.verify(authorization, pass);
+    const {codTurma, data, disciplina} = req.query;
+    const dat = data === '' ? null : data;
+    const result = await user.readFreq({codTurma, data: dat, disciplina});
 
     return res.status(200).json({ result });
 }
