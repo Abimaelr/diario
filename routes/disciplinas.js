@@ -20,11 +20,11 @@ router.route('/')
 
 router.route('/diarios')
     .get(
-        permissionsDisciplina, 
+        // permissionsDisciplina, 
         readDiarios
     )
     .post(
-        permissionsDisciplina, 
+        // permissionsDisciplina, 
         verifyConsistencia,
         verifyExists,
         writeFreq

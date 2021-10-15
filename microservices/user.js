@@ -47,9 +47,10 @@ const verifyConsistencia = async (req, res, next) => {
 
 const verifyExists = async (req, res, next) => {
     const { pack } = req.body;
-    const { idTurma, idProfessor, data, bimestre} = pack[0];
-    const search =  { idTurma, idProfessor, data, bimestre};
+    const { codTurma, disciplina, idProfessor, data, bimestre} = pack[0];
+    const search =  { codTurma, disciplina, idProfessor, data, bimestre};
     const result = await readFreq(search)
+    console.log(result)
     if (result.length) return res.status(401).json({ message: "Data inválida!"} )
     next();
 }
