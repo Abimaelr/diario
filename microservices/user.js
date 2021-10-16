@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { find, readFreq } = require('../services/user');
+const { readBol } = require('../controller/disciplinas');
+const { find, readFreq, readBoletim } = require('../services/user');
 const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
 
 const permissionsDisciplinas = async (req, res, next) => {
@@ -50,10 +51,19 @@ const verifyExists = async (req, res, next) => {
     const { codTurma, disciplina, idProfessor, data, bimestre} = pack[0];
     const search =  { codTurma, disciplina, idProfessor, data, bimestre};
     const result = await readFreq(search)
-    console.log(result)
-    if (result.length) return res.status(401).json({ message: "Data inválida!"} )
+    if (result.length) return res.status(401).json({ message: "Esse diário já está preenchido!"} )
     next();
 }
+
+const verifyExistsBol = async (req, res, next) => {
+    const { pack } = req.body;
+    const { codTurma, disciplina, bimestre} = pack[0];
+    const search =  { codTurma, disciplina, bimestre};
+    const result = await readBoletim(search)
+    if (result.length) return res.status(401).json({ message: "Boletim já existe!"} )
+    next();
+}
+
 
 
 module.exports = {
@@ -61,5 +71,6 @@ module.exports = {
     permissionsDisciplina,
     permissionsRead,
     verifyConsistencia,
-    verifyExists
+    verifyExists,
+    verifyExistsBol
 }

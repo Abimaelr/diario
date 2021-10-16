@@ -21,8 +21,9 @@ const readDiarios = async (req, res) => {
     // const { authorization } = req.headers;
     // const { userId } = jwt.verify(authorization, pass);
     const {codTurma, data, disciplina} = req.query;
-    const dat = data === '' ? null : data;
-    const result = await user.readFreq({codTurma, data: dat, disciplina});
+    const query = !data ? {codTurma, disciplina} : {codTurma, data, disciplina};
+    console.log(query)
+    const result = await user.readFreq(query);
 
     return res.status(200).json({ result });
 }
@@ -35,22 +36,24 @@ const writeFreq = async (req, res) => {
 
 const editFrequ = async (req, res) => {
     const frequencias = await req.body;
-    const { idTurma, idProfessor, data, materia} = frequencias.pack[0];
-    const query = { idTurma, idProfessor, data, materia } ;
+    const { codTurma, data, disciplina} = frequencias.pack[0];
+    const query = { codTurma, data, disciplina } ;
+    // console.log( query)
     const result = await user.editFreq(query, frequencias.pack);
     return res.status(200).json({ result });
 }
 
 const readBol = async (req, res) => {
-    const query = req.body;
+    const {codTurma, disciplina} = req.query;
+    const query =  {codTurma, disciplina} ;
+    console.log(query)
     const result = await user.readBoletim(query);
-
     return res.status(200).json({ result });
 }
 
 const writeBol = async (req, res) => {
     const boletim = await req.body;
-    console.log(boletim)
+    console.log('oie')
     const result = await user.writeBoletim(boletim.pack);
     return res.status(200).json({ result });
 }

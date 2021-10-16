@@ -28,8 +28,8 @@ const readFreq = async (pack) => {
 }
 
 const editFreq = async (remv, pack) => {
-    await remove(remv);
-    const result = await create(pack);
+    await diarios.remove(remv);
+    const result = await diarios.create(pack);
     return result;
 }
 

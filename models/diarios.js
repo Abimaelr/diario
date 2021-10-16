@@ -13,7 +13,7 @@ const create = async (diario) => {
 const read = async (query) => {
     const out = await  connect()
     .then((db) => db.collection('diarios')
-    .find(query).toArray())
+    .find(query).sort({"data": -1}).toArray())
     .then((result) => result);
     return out;
     };
