@@ -11,41 +11,54 @@ router.use(validateUser);
 
 router.route('/')
     .get(
+        validateToken,
         read
     )
     .put(
+        validateToken,
         permissionsDisciplinas,
         edit
     );
 
 router.route('/diarios')
     .get(
+        validateToken,
         // permissionsDisciplina, 
         readDiarios
     )
     .post(
+        validateToken,
         // permissionsDisciplina, 
         verifyConsistencia,
         verifyExists,
         writeFreq
     )
     .put(
+        validateToken,
         // permissionsDisciplina, 
         verifyConsistencia,
         editFrequ
     );
 
+router.route('/grade')
+    .get(
+        validateToken
+    )
+
 router.route('/boletins')
     .get(
+        validateToken,
         // permissionsRead,
         readBol
     )
     .post(
+        validateToken,
         // permissionsDisciplina,
         verifyConsistencia,
         verifyExistsBol,
         writeBol
     ).put(
+        validateToken,
         permissionsDisciplina, 
         verifyConsistencia,  
     );

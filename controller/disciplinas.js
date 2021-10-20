@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const disciplinas = require('../compCurricular');
 const user = require('../services/user')
 
 const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
@@ -38,7 +38,6 @@ const editFrequ = async (req, res) => {
     const frequencias = await req.body;
     const { codTurma, data, disciplina} = frequencias.pack[0];
     const query = { codTurma, data, disciplina } ;
-    // console.log( query)
     const result = await user.editFreq(query, frequencias.pack);
     return res.status(200).json({ result });
 }
@@ -66,6 +65,8 @@ const editBol = async (req, res) => {
     return res.status(200).json({ result });
 }
 
+const grade = async (req, res) => res.status(200).json(disciplinas);
+
 
 module.exports = {
     edit,
@@ -75,5 +76,6 @@ module.exports = {
     editFrequ,
     writeBol,
     editBol,
-    readBol
+    readBol,
+    grade
 }
