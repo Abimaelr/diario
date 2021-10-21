@@ -8,12 +8,12 @@ const router = express.Router();
 router.route('/')
     .get(
         validateToken,
-        validateUser,
+        // validateUser,
         basicInfo
     )
     .put(
         validateToken,
-        validateUser,
+        // validateUser,
         updatePassword
     );
 

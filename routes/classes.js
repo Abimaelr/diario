@@ -8,12 +8,12 @@ const router = express.Router();
 router.route('/')
     .get(
         validateToken,
-        validateUser,
+        // validateUser,
         classes
     )
     .post(
         validateToken,
-        validateUser,
+        // validateUser,
         verifyClasses,
         verifyPermissionCreate,
         createClasse
@@ -22,7 +22,7 @@ router.route('/')
     router.route('/p/')
         .get(
         validateToken,
-        validateUser,
+        // validateUser,
         classByTeacher
     )
 
