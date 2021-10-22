@@ -7,8 +7,9 @@ const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
 const read = async ( req, res) => {
     const { authorization } = req.headers;
     const { userId } = jwt.verify(authorization, pass);
+    
     const result =  await user.find(userId);
-    res.status(200).json({ disciplinas: result.disciplinas})
+    return res.status(200).json({ disciplinas: result.disciplinas})
 }
 
 const edit = async (req, res) => {
@@ -21,10 +22,9 @@ const readDiarios = async (req, res) => {
     // const { authorization } = req.headers;
     // const { userId } = jwt.verify(authorization, pass);
     const {codTurma, data, disciplina} = req.query;
-    const query = !data ? {codTurma, disciplina} : {codTurma, data, disciplina};
-    console.log(query)
+    const query = !data ? {codTurma, "disciplina.nome": disciplina} : {codTurma, data, "disciplina.nome": disciplina};
     const result = await user.readFreq(query);
-
+    console.log(result)
     return res.status(200).json({ result });
 }
 
@@ -44,9 +44,10 @@ const editFrequ = async (req, res) => {
 
 const readBol = async (req, res) => {
     const {codTurma, disciplina} = req.query;
-    const query =  {codTurma, disciplina} ;
+    const query =  {codTurma, "disciplina.nome": disciplina} ;
     console.log(query)
     const result = await user.readBoletim(query);
+    console.log(result)
     return res.status(200).json({ result });
 }
 

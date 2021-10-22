@@ -1,5 +1,5 @@
 const express = require('express');
-const { edit, read, writeFreq, editFrequ, writeBol, readDiarios, readBol, grade } = require('../controller/disciplinas');
+const { edit, read, writeFreq, editFrequ, writeBol, readDiarios, readBol } = require('../controller/disciplinas');
 const { validateToken, validateUser } = require('../microservices/token');
 const { permissionsDisciplinas, permissionsDisciplina, verifyConsistencia, verifyExists, permissionsRead, verifyExistsBol} = require('../microservices/user');
 
@@ -14,40 +14,46 @@ router.route('/')
         read
     )
     .put(
+        permissionsDisciplinas,
         edit
     );
 
 router.route('/diarios')
     .get(
+        // permissionsDisciplina, 
         readDiarios
     )
     .post(
+        // permissionsDisciplina, 
         verifyConsistencia,
         verifyExists,
         writeFreq
     )
     .put(
+        // permissionsDisciplina, 
         verifyConsistencia,
         editFrequ
     );
 
 router.route('/grade')
     .get(
-        grade
-
+        validateToken
     )
 
 router.route('/boletins')
     .get(
+        validateToken,
         // permissionsRead,
         readBol
     )
     .post(
+        validateToken,
         // permissionsDisciplina,
         verifyConsistencia,
         verifyExistsBol,
         writeBol
     ).put(
+        validateToken,
         permissionsDisciplina, 
         verifyConsistencia,  
     );

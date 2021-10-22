@@ -7,7 +7,7 @@ const basicInfo = (req, res) => {
 
     const {nome, profId} = jwt.verify(authorization, pass);
 
-    res.status(200).json({nome, profId});
+    res.status(200).json({nome});
 }
 
 const updatePassword = async (req, res) => {

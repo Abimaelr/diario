@@ -1,4 +1,5 @@
 const express = require('express');
+
 const { classes, createClasse, editClass, classByTeacher, studentsClass } = require('../controller/classes');
 const { verifyClasses, verifyPermissionCreate, verifyPermission } = require('../microservices/classes');
 const { validateToken, validateUser } = require('../microservices/token');
