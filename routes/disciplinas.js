@@ -54,7 +54,7 @@ router.route('/boletins')
         writeBol
     ).put(
         validateToken,
-        permissionsDisciplina, 
+        // permissionsDisciplina, 
         verifyConsistencia,  
     );
 
