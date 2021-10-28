@@ -4,10 +4,10 @@ const CampExp = ['O eu, o outro e o nós', 'Corpo, gestos e movimentos', 'Traço
 module.exports =
     {
         "Educação Infantil": [
-            {componente:"Educação Infantil", tipo:'ci', nome: "Cuidando da minha história", ha: 2, cod: "edci"},
-            {componente:"Educação Infantil", tipo:'ci', nome: "Cuidando de João Pessoa", ha: 2, cod: "edci"},
-            {componente:"Educação Infantil", tipo:'ci', nome: "Cuidando do Planeta", ha: 2, cod: "edci"},
-            {componente:"Educação Infantil", tipo:'ci', nome: "Cuidando do ser criança", ha: 2, cod: "edci"},
+            {componente:"Educação Infantil", tipo:'ci', DireitosAp, CampExp, nome: "Cuidando da minha história", ha: 2, cod: "edci"},
+            {componente:"Educação Infantil", tipo:'ci', DireitosAp, CampExp, nome: "Cuidando de João Pessoa", ha: 2, cod: "edci"},
+            {componente:"Educação Infantil", tipo:'ci', DireitosAp, CampExp, nome: "Cuidando do Planeta", ha: 2, cod: "edci"},
+            {componente:"Educação Infantil", tipo:'ci', DireitosAp, CampExp, nome: "Cuidando do ser criança", ha: 2, cod: "edci"},
         ],
         "Ciclo 1": [
             {componente:"Ciclo 1", tipo:'c', nome: "Artes", ha: 2, eixos: ["Eixo único"], cod: "ai"},
