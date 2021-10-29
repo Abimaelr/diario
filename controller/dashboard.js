@@ -1,4 +1,4 @@
-const { findClasses, findTeachers, studentsBySchool, changePass, createNewClass} = require("../services/dashboard")
+const { findClasses, findTeachers, studentsBySchool, changePass, createNewClass, getStudentQuery} = require("../services/dashboard")
 const jwt = require('jsonwebtoken');
 const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
 
@@ -65,11 +65,19 @@ const getStudents = async (req, res) => {
     return res.status(200).json({students})
 }
 
+const getStudent = async (req, res) => {
+    const { alunoId } = req.params;
+    console.log(alunoId)
+    const student = await getStudentQuery({alunoId});
+    return res.status(200).json({student})
+}
+
 module.exports = {
     classes,
     getTeachers,
     getStudents,
     basicInfo,
     updatePassword,
-    createClasse
+    createClasse,
+    getStudent
 }

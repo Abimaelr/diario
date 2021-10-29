@@ -38,6 +38,8 @@ const studentsBySchool = async (userId) => {
     })
 }
 
+const getStudentQuery = async (query) => students(query);
+
 // const studentsByClass = async (codTurma) => {
 //     const classArr = await classesByCode(codTurma);
 //     const allStudents = await students();
@@ -85,5 +87,6 @@ module.exports = {
     classByTeacher,
     changePass,
     getClassId,
-    createNewClass
+    createNewClass,
+    getStudentQuery
 }

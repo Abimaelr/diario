@@ -19,12 +19,14 @@ const edit = async (req, res) => {
 }
 
 const readDiarios = async (req, res) => {
-    // const { authorization } = req.headers;
-    // const { userId } = jwt.verify(authorization, pass);
     const {codTurma, data, disciplina} = req.query;
     const query = !data ? {codTurma, "disciplina.nome": disciplina} : {codTurma, data, "disciplina.nome": disciplina};
     const result = await user.readFreq(query);
-    console.log(result)
+    return res.status(200).json({ result });
+}
+
+const readDiarioQuery = async (req, res) => {
+    const result = await user.readFreq( req.query);
     return res.status(200).json({ result });
 }
 
@@ -48,6 +50,11 @@ const readBol = async (req, res) => {
     console.log(query)
     const result = await user.readBoletim(query);
     console.log(result)
+    return res.status(200).json({ result });
+}
+
+const readBolQuery = async (req, res) => {
+    const result = await user.readBoletim(req.query);
     return res.status(200).json({ result });
 }
 

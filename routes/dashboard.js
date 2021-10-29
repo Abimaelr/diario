@@ -1,5 +1,5 @@
 const express = require('express');
-const { classes, basicInfo, updatePassword, createClasse } = require('../controller/dashboard');
+const { classes, basicInfo, updatePassword, createClasse, getStudent } = require('../controller/dashboard');
 const { verifyClasses, verifyPermissionCreate } = require('../microservices/classes');
 const { validateToken, validateUser } = require('../microservices/token');
 
@@ -16,6 +16,13 @@ router.route('/')
         // validateUser,
         updatePassword
     );
+
+router.route('/student/:alunoId')
+    .get(
+        validateToken,
+        // validateUser,
+        getStudent
+    )
 
 // router.route('/classes')
 //         .get(

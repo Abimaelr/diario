@@ -23,16 +23,13 @@ const createClasse = async (req, res) => {
     const { userId } = verify;
 
     const create = await services.createNewClass(userId, codTurma, nomeTurma, turno);
-    
     return res.status(201).json({create})
 }
 
 const editClass = async (req, res) => {
     const { id } = req.params;
     const { nomeTurma, turno} = req.body;
-
     const edit = await editClassId(id, nomeTurma, turno);
-
     return res.status(201).json({edit})
 }
 
@@ -45,6 +42,7 @@ const classByTeacher = async (req, res) => {
 
 const studentsClass = async (req, res) => {
     const { id } = req.params; 
+
     const students = await studentsByClass({codTurma: id})
 
     return res.status(200).json({ students })

@@ -20,22 +20,29 @@ router.route('/')
         createClasse
     )
 
-    router.route('/p/')
-        .get(
+router.route('/p/')
+    .get(
         validateToken,
         // validateUser,
         classByTeacher
     )
 
 router.route('/students/:id')
-            .get(
-                validateToken,
-                // validateUser,
-                studentsClass
-            )
+    .get(
+        validateToken,
+        // validateUser,
+        studentsClass
+    )
+
+router.route('/:id')
+    .get(
+        validateToken,
+        // validateUser,
+        studentsClass
+    )
 // router.route('/:id')
 //     .get(
-        
+
 //     )
 //     .put(
 //         validateToken,
