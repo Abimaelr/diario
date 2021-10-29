@@ -1,7 +1,7 @@
 const express = require('express');
-const { edit, read, writeFreq, editFrequ, writeBol, readDiarios, readBol, grade, editBol } = require('../controller/disciplinas');
+const { edit, read, writeFreq, editFrequ, writeBol, readDiarios, readBol, grade, editBol, readDiarioQuery, readBolQuery } = require('../controller/disciplinas');
 const { validateToken, validateUser } = require('../microservices/token');
-const { permissionsDisciplinas, permissionsDisciplina, verifyConsistencia, verifyExists, permissionsRead, verifyExistsBol} = require('../microservices/user');
+const { permissionsDisciplinas, permissionsDisciplina, verifyConsistencia, verifyExists, permissionsRead, verifyExistsBol } = require('../microservices/user');
 
 
 const router = express.Router();
@@ -35,6 +35,11 @@ router.route('/diarios')
         editFrequ
     );
 
+router.route('/diario/q')
+    .get(
+        readDiarioQuery
+    );
+
 router.route('/grade')
     .get(
         // validateToken,
@@ -56,8 +61,13 @@ router.route('/boletins')
     ).put(
         validateToken,
         // permissionsDisciplina, 
-        verifyConsistencia, 
+        verifyConsistencia,
         editBol
+    );
+
+router.route('/boletim/q')
+    .get(
+        readBolQuery
     );
 
 module.exports = router;
