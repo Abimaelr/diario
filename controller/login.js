@@ -8,8 +8,8 @@ const login = async (req, res) => {
     const log = await find(userId);
 
     if(!log || log.password !== password) return res.status(400).send({ message: "id ou senha inválidos!" });
-    const { profId, nome, turmas, userId:user, disciplinas } = log;
-    const out = { profId, nome, turmas, userId:user } 
+    const { profId, nome, turmas, userId:user, disciplinas, permissions } = log;
+    const out = { profId, nome, turmas, userId:user, permissions } 
     const token = jwt.sign( out , pass);
     
     return res.status(201).json({ token, disciplinas })
