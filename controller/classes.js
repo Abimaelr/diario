@@ -37,14 +37,12 @@ const classByTeacher = async (req, res) => {
     const { authorization } = req.headers;
     const { profId} = jwt.verify(authorization, pass);
     const classes = await services.classByTeacher(profId)
-    res.status(200).json({ classes })
+    return res.status(200).json({ classes })
 }
 
 const studentsClass = async (req, res) => {
     const { id } = req.params; 
-
     const students = await studentsByClass({codTurma: id})
-
     return res.status(200).json({ students })
 }
 

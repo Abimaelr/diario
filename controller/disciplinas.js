@@ -1,28 +1,28 @@
 const jwt = require('jsonwebtoken');
 const disciplinas = require('../compCurricular');
+const { findClasses } = require('../services/dashboard');
 const user = require('../services/user')
 
 const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
 
 const read = async (req, res) => {
     const { authorization } = req.headers;
-    const { userId } = jwt.verify(authorization, pass);
-
+    const { userId, permissions } = jwt.verify(authorization, pass);
     const result = await user.find(userId);
+
     return res.status(200).json({ disciplinas: result.disciplinas })
 }
 
 const edit = async (req, res) => {
     const { userId, disciplinas } = req.body;
     const result = await user.editDisciplinas({ userId, disciplinas });
-    res.status(201).json({ message: "Disciplinas editadas com sucesso!", result })
+    return res.status(201).json({ message: "Disciplinas editadas com sucesso!", result })
 }
 
 const readDiarios = async (req, res) => {
     const { codTurma, data, disciplina } = req.query;
-    const query = !data ? { codTurma,  disciplina } : { codTurma, data, disciplina };
+    const query = !data ? { codTurma, disciplina } : { codTurma, data, disciplina };
     const result = await user.readFreq(query);
-    console.log('a', query)
     return res.status(200).json({ result });
 }
 
@@ -37,7 +37,6 @@ const readDiarioQuery = async (req, res) => {
             assiduidade: presenca ? acc[item.disciplina].assiduidade + 1 : acc[item.disciplina].assiduidade,
             total: acc[item.disciplina].total + 1
         }
-
         return acc;
     }, {})
     return res.status(200).json(out);
@@ -66,13 +65,10 @@ const readBol = async (req, res) => {
 
 const readBolQuery = async (req, res) => {
     const result = await user.readBoletim(req.query);
-
     const out = result.reduce((acc, item) => {
         const { nomeCompleto, nota, bimestre } = item;
-        if (!acc[item.disciplina]) acc[item.disciplina] = []
-
-        acc[item.disciplina] = [...acc[item.disciplina], { nomeCompleto, bimestre, nota}]
-
+        if (!acc[item.disciplina]) acc[item.disciplina] = [];
+        acc[item.disciplina] = [...acc[item.disciplina], { nomeCompleto, bimestre, nota }]
         return acc;
     }, {})
     return res.status(200).json(out);
@@ -93,7 +89,6 @@ const editBol = async (req, res) => {
 }
 
 const grade = async (req, res) => res.status(200).json(disciplinas);
-
 
 module.exports = {
     edit,

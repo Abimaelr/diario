@@ -4,10 +4,8 @@ const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
 
 const basicInfo = (req, res) => {
     const { authorization } = req.headers;
-
     const {nome, permissions} = jwt.verify(authorization, pass);
-
-    res.status(200).json({nome, permissions});
+    return res.status(200).json({nome, permissions});
 }
 
 const updatePassword = async (req, res) => {
@@ -24,35 +22,27 @@ const updatePassword = async (req, res) => {
 }
 
 const classes = async (req, res) => {
-   
     const { authorization } = req.headers;
-
     const verify = jwt.verify(authorization, pass);
     const { userId } = verify;
     const classes = await findClasses(userId);
-
     return res.status(200).json({classes})
 }
 
 const createClasse = async (req, res) => {
-   
     const { authorization } = req.headers;
     const { codTurma, nomeTurma, turno} = req.body;
     const verify = jwt.verify(authorization, pass);
     const { userId } = verify;
-
     const create = await createNewClass(userId, codTurma, nomeTurma, turno);
-    
     return res.status(200).json({create})
 }
 
 const getTeachers = async (req, res) => {
     const { authorization } = req.headers;
-
     const verify = jwt.verify(authorization, pass);
     const { userId } = verify;
     const teacher = await findTeachers(userId);
-
     return res.status(200).json({teacher})
 }
 
@@ -67,7 +57,6 @@ const getStudents = async (req, res) => {
 
 const getStudent = async (req, res) => {
     const { alunoId } = req.params;
-    console.log(alunoId)
     const student = await getStudentQuery({alunoId});
     return res.status(200).json({student})
 }

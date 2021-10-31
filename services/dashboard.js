@@ -19,9 +19,9 @@ const createNewClass = async (codEscola, codTurma, nomeTurma, turno) => {
 const findTeachers = async (userId) => {
     const teachersArr = await teachers();
     const turmas = await findClasses(userId)
-    const turmasCod = turmas.map(({codTurma}) => codTurma?codTurma:'');
-    const out = teachersArr.filter( teacher => {
-        if(teacher.turmas.some( ai => turmasCod.includes(ai) ))
+    const turmasCod = turmas.map(({ codTurma }) => codTurma ? codTurma : '');
+    const out = teachersArr.filter(teacher => {
+        if (teacher.turmas.some(ai => turmasCod.includes(ai)))
             return teacher
     })
     return out;
@@ -31,8 +31,8 @@ const studentsBySchool = async (userId) => {
     const classArr = await classesBySchool(userId);
     const allStudents = await students();
 
-    const studentsArr = allStudents.filter( student => {
-        if(classArr.map(({codTurma}) => codTurma).includes(student.codTurma)) {
+    const studentsArr = allStudents.filter(student => {
+        if (classArr.map(({ codTurma }) => codTurma).includes(student.codTurma)) {
             return student
         }
     })
@@ -40,35 +40,17 @@ const studentsBySchool = async (userId) => {
 
 const getStudentQuery = async (query) => students(query);
 
-// const studentsByClass = async (codTurma) => {
-//     const classArr = await classesByCode(codTurma);
-//     const allStudents = await students();
-//     try{
-//         const studentsArr = allStudents.filter( student => {
-//             if(classArr.map(({codTurma}) => codTurma).includes(student.codTurma)) {
-//                 console.log(student)
-//                 return student
-//             }
-//         })
-//         console.log(studentsArr)
-//         return studentsArr;
-//     }
-//     catch{
-//         return false;
-//     }
-// }
-
-const studentsByClass = async ({codTurma}) => {
-    const studentsArr = await students({codTurma});
+const studentsByClass = async ({ codTurma }) => {
+    const studentsArr = await students({ codTurma });
     return studentsArr;
 }
 
 const classByTeacher = async (profId) => {
     const prof = await teachersId(profId);
     const classArr = await classes();
-   
-    const out = classArr.filter( sala => {
-        if(prof.turmas.includes(sala.codTurma)) {
+
+    const out = classArr.filter(sala => {
+        if (prof.turmas.includes(sala.codTurma)) {
             return sala
         }
     })

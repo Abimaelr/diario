@@ -20,8 +20,8 @@ const studentsByClass = async (codTurma) => {
     const classArr = await classesByCode(codTurma);
     const allStudents = await students();
 
-    const studentsArr = allStudents.filter( student => {
-        if(classArr.map(({codTurma}) => codTurma).includes(student.codTurma)) {
+    const studentsArr = allStudents.filter(student => {
+        if (classArr.map(({ codTurma }) => codTurma).includes(student.codTurma)) {
             return student
         }
     })
@@ -31,8 +31,8 @@ const studentsByClass = async (codTurma) => {
 const classByTeacher = async (profId) => {
     const prof = await teachersId(profId);
     const classArr = await classes();
-    const out = classArr.filter( sala => {
-        if(prof.turmas.includes(sala.codTurma)) {
+    const out = classArr.filter(sala => {
+        if (prof.turmas.includes(sala.codTurma)) {
             return sala
         }
     })
