@@ -58,13 +58,14 @@ const editFrequ = async (req, res) => {
 
 const readBol = async (req, res) => {
     const { codTurma, disciplina } = req.query;
-    const query = { codTurma, "disciplina.nome": disciplina };
+    const query = { codTurma, "disciplina": disciplina };
     const result = await user.readBoletim(query);
     return res.status(200).json({ result });
 }
 
 const readBolQuery = async (req, res) => {
     const result = await user.readBoletim(req.query);
+    console.log('opa')
     const out = result.reduce((acc, item) => {
         const { nomeCompleto, nota, bimestre } = item;
         if (!acc[item.disciplina]) acc[item.disciplina] = [];
