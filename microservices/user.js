@@ -64,6 +64,13 @@ const verifyExistsBol = async (req, res, next) => {
     next();
 }
 
+const verifyExistsUser = async (req, res, next) => {
+    const { userId } = req.body;
+    const result = await find(userId)
+    if (result) return res.status(401).send( "Usuário Já Cadastrado")
+    next();
+}
+
 
 
 module.exports = {
@@ -72,5 +79,6 @@ module.exports = {
     permissionsRead,
     verifyConsistencia,
     verifyExists,
-    verifyExistsBol
+    verifyExistsBol,
+    verifyExistsUser
 }

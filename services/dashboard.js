@@ -1,4 +1,5 @@
 const { classesBySchool, classesByCode, teachers, classes, teachersId, updatePass, createClass, students } = require("../models/dashboard");
+const user = require('../models/user');
 
 const findClasses = async (userId) => {
     const classArr = await classesBySchool(userId);
@@ -61,6 +62,8 @@ const changePass = async (userId, pass) => {
     await updatePass(userId, pass);
 }
 
+const createProf = async (data) => user.create(data);
+
 module.exports = {
     findClasses,
     findTeachers,
@@ -70,5 +73,6 @@ module.exports = {
     changePass,
     getClassId,
     createNewClass,
-    getStudentQuery
+    getStudentQuery,
+    createProf
 }

@@ -1,7 +1,8 @@
 const express = require('express');
-const { classes, basicInfo, updatePassword, createClasse, getStudent } = require('../controller/dashboard');
+const { classes, basicInfo, updatePassword, createClasse, getStudent, getProfessores, createProfessor } = require('../controller/dashboard');
 const { verifyClasses, verifyPermissionCreate } = require('../microservices/classes');
 const { validateToken, validateUser } = require('../microservices/token');
+const { verifyExistsUser } = require('../microservices/user');
 
 const router = express.Router();
 
@@ -23,6 +24,17 @@ router.route('/student/:alunoId')
         // validateUser,
         getStudent
     )
+
+router.route('/professores')
+        .get(
+            validateToken,
+            getProfessores 
+        )
+        .post(
+            validateToken,
+            verifyExistsUser,
+            createProfessor
+        )
 
 // router.route('/classes')
 //         .get(

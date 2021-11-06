@@ -7,9 +7,9 @@ const find = async (userId) => {
     return result;
 }
 
-const editDisciplinas = async ({userId, disciplinas}) => {
-    return await user.edit({userId, disciplinas});
-}
+const findProfessores = async (query) => user.findUsers(query);
+
+const editDisciplinas = async ({userId, disciplinas}) => user.edit({userId, disciplinas});
 
 const getDisciplinas = async (userId) => {
     const result = await user.findUser(userId);
@@ -59,5 +59,6 @@ module.exports = {
     editFreq,
     writeBoletim,
     readBoletim,
-    editBoletim
+    editBoletim,
+    findProfessores
 }

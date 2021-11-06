@@ -8,6 +8,14 @@ const findUser = async (userId) => {
     return out;
 };
 
+const findUsers = async (query) => {
+    const out = await connect()
+        .then((db) => db.collection('users')
+            .find(query).toArray())
+        .then((result) => result);
+    return out;
+};
+
 const edit = async ({ userId, disciplinas }) => {
     const out = await connect()
         .then((db) => db.collection('users')
@@ -16,7 +24,13 @@ const edit = async ({ userId, disciplinas }) => {
     return out;
 };
 
+const create = async (data) => connect().
+    then((db) => db.collection('users').
+        insertOne(data).then(result => result))
+
 module.exports = {
     findUser,
-    edit
+    edit,
+    findUsers,
+    create
 }
