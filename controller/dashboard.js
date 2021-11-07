@@ -134,5 +134,6 @@ module.exports = {
     createProfessor,
     editProf,
     createStudent,
-    editStudent
+    editStudent,
+    findStu
 }

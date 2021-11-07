@@ -1,5 +1,5 @@
 const express = require('express');
-const { classes, basicInfo, updatePassword, createClasse, getStudent, getProfessores, createProfessor, editProf, createStudent, editStudent } = require('../controller/dashboard');
+const { classes, basicInfo, updatePassword, createClasse, getStudent, getProfessores, createProfessor, editProf, createStudent, editStudent, findStu } = require('../controller/dashboard');
 const { verifyClasses, verifyPermissionCreate } = require('../microservices/classes');
 const { validateToken, validateUser } = require('../microservices/token');
 const { verifyExistsUser } = require('../microservices/user');
@@ -22,7 +22,7 @@ router.route('/')
     .get(
         validateToken,
         // validateUser,
-        findStudent
+        findStu
     )
     .post(
         
