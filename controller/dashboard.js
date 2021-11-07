@@ -113,6 +113,15 @@ const editStudent = async (req, res) => {
         return res.status(400).send("Campos incompletos!")
 }
 
+const findStu = async (req, res) => {
+    const { alunoId } = req.body;
+    const stu = await getStudentQuery({ alunoId });
+    if (stu.length > 0)
+        return res.status(200).send(stu[0]);
+    else
+        return res.status(400).send("Estudante não encontrado!")
+}
+
 module.exports = {
     classes,
     getTeachers,

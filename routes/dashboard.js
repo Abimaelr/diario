@@ -22,9 +22,12 @@ router.route('/')
     .get(
         validateToken,
         // validateUser,
-        createStudent
+        findStudent
     )
     .post(
+        
+    )
+    .put(
         validateToken,
         editStudent
     )
