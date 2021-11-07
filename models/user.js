@@ -24,6 +24,14 @@ const edit = async ({ userId, disciplinas }) => {
     return out;
 };
 
+const editTurmas = async ({ userId, turmas, profId }) => {
+    const out = await connect()
+        .then((db) => db.collection('users')
+            .updateOne({ userId }, { $set: { turmas, profId } }))
+        .then((result) => result);
+    return out;
+};
+
 const create = async (data) => connect().
     then((db) => db.collection('users').
         insertOne(data).then(result => result))
@@ -32,5 +40,6 @@ module.exports = {
     findUser,
     edit,
     findUsers,
-    create
+    create,
+    editTurmas
 }

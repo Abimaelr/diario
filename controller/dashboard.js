@@ -1,4 +1,4 @@
-const { findClasses, findTeachers, studentsBySchool, changePass, createNewClass, getStudentQuery, createProf } = require("../services/dashboard");
+const { findClasses, findTeachers, studentsBySchool, changePass, createNewClass, getStudentQuery, createProf, createEstudante } = require("../services/dashboard");
 
 const users = require('../services/user');
 const jwt = require('jsonwebtoken');
@@ -65,18 +65,51 @@ const getStudent = async (req, res) => {
 
 const getProfessores = async (req, res) => {
     const { profId } = req.query;
+
     const professor = await users.findProfessores({ profId })
+    console.log(professor)
     return res.status(200).json(professor)
 }
 
 const createProfessor = async (req, res) => {
     const { nome, userId, profId, turmas } = req.body;
-
     if (nome && userId && profId && turmas) {
         await createProf(req.body);
         return res.status(201).send("Professor criado com sucesso!")
     }
-    else 
+    else
+        return res.status(400).send("Campos incompletos!")
+}
+
+const editProf = async (req, res) => {
+    const { userId, turmas, profId } = req.body;
+    // console.log(turmas)
+    const result = await users.editTurmas({ userId, turmas, profId });
+    console.log(result)
+    return res.status(201).json({ message: "Turmas editadas com sucesso!", result })
+};
+
+const createStudent = async (req, res) => {
+    const { alunoId, codTurma, nomeTurma, nomeCompleto, nascimento } = req.body;
+    const stu = await getStudentQuery({ alunoId });
+    if (alunoId && codTurma && nomeTurma && nomeCompleto && nascimento) {
+        await createEstudante(req.body);
+        return res.status(201).send("Aluno criado com sucesso!")
+    }
+    else if (stu.length > 0)
+        return res.status(400).send("Estudante já existe!")
+    else
+        return res.status(400).send("Campos incompletos!")
+}
+
+const editStudent = async (req, res) => {
+    const { alunoId, codTurma } = req.body;
+
+    if (alunoId && codTurma) {
+        await createEstudante(req.body);
+        return res.status(201).send("Aluno editado com sucesso!")
+    }
+    else
         return res.status(400).send("Campos incompletos!")
 }
 
@@ -89,5 +122,8 @@ module.exports = {
     createClasse,
     getStudent,
     getProfessores,
-    createProfessor
+    createProfessor,
+    editProf,
+    createStudent,
+    editStudent
 }

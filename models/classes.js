@@ -32,10 +32,10 @@ const classes = async () => {
     return out;
 };
 
-const createClass = async (codTurma, nomeTurma, turno, codEscola) => {
+const createClass = async (codEscola, codTurma, nomeTurma, turno) => {
     const out = await connect()
         .then((db) => db.collection('classes')
-        .insertOne({codEscola, codTurma, nomeTurma, turno, diarios: [], boletim: [], visible: 1}))
+        .insertOne({codEscola, codTurma, nomeTurma, turno, visible: 1}))
         .then((result) => result.ops);
     return out;
 };

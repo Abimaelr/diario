@@ -16,6 +16,8 @@ const getDisciplinas = async (userId) => {
     return result;
 }
 
+const editTurmas = async ({userId, turmas, profId}) => user.editTurmas({userId, turmas, profId});
+
 const writeFreq = async (pack) => {
 
     const result = await diarios.create(pack);
@@ -60,5 +62,6 @@ module.exports = {
     writeBoletim,
     readBoletim,
     editBoletim,
-    findProfessores
+    findProfessores,
+    editTurmas
 }

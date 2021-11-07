@@ -64,6 +64,23 @@ const updatePass = async (userId, password) => {
     return out;
 };
 
+const createStudent = async (student) => {
+    const out = await connect()
+        .then((db) => db.collection('alunos')
+        .insertOne(student).toArray())
+        .then((result) => result);
+    return out;
+};
+
+const editStudent = async ({alunoId, codTurma}) => {
+    const out = await connect()
+        .then((db) => db.collection('users')
+        .updateOne({ alunoId },{ $set: { codTurma }}))
+        .then((result) => result);
+    return out;
+};
+
+
 module.exports = {
     classesBySchool,
     teachers,
@@ -72,5 +89,7 @@ module.exports = {
     classes,
     teachersId,
     updatePass,
-    createClass
+    createClass,
+    createStudent,
+    editStudent
 }
