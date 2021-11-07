@@ -83,7 +83,6 @@ const createProfessor = async (req, res) => {
 
 const editProf = async (req, res) => {
     const { userId, turmas, profId } = req.body;
-    // console.log(turmas)
     const result = await users.editTurmas({ userId, turmas, profId });
     console.log(result)
     return res.status(201).json({ message: "Turmas editadas com sucesso!", result })
@@ -92,14 +91,15 @@ const editProf = async (req, res) => {
 const createStudent = async (req, res) => {
     const { alunoId, codTurma, nomeTurma, nomeCompleto, nascimento } = req.body;
     const stu = await getStudentQuery({ alunoId });
-    if (alunoId && codTurma && nomeTurma && nomeCompleto && nascimento) {
+    console.log(stu)
+    if (stu.length > 0)
+        return res.status(400).send("Estudante já existe!")
+    else if (!(alunoId && codTurma && nomeCompleto && nascimento))
+        return res.status(400).send("Campos incompletos!")
+    else if (alunoId && codTurma && nomeCompleto && nascimento) {
         await createEstudante(req.body);
         return res.status(201).send("Aluno criado com sucesso!")
     }
-    else if (stu.length > 0)
-        return res.status(400).send("Estudante já existe!")
-    else
-        return res.status(400).send("Campos incompletos!")
 }
 
 const editStudent = async (req, res) => {

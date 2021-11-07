@@ -25,7 +25,8 @@ router.route('/')
         findStu
     )
     .post(
-        
+        validateToken,
+        createStudent
     )
     .put(
         validateToken,

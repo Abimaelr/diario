@@ -67,7 +67,7 @@ const updatePass = async (userId, password) => {
 const createStudent = async (student) => {
     const out = await connect()
         .then((db) => db.collection('alunos')
-        .insertOne(student).toArray())
+        .insertOne(student))
         .then((result) => result);
     return out;
 };
