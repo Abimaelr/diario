@@ -1,4 +1,4 @@
-const { findClasses, findTeachers, studentsBySchool, changePass, createNewClass, getStudentQuery, createProf, createEstudante } = require("../services/dashboard");
+const { findClasses, findTeachers, studentsBySchool, changePass, createNewClass, getStudentQuery, createProf, createEstudante, editEstudante } = require("../services/dashboard");
 
 const users = require('../services/user');
 const jwt = require('jsonwebtoken');
@@ -91,7 +91,6 @@ const editProf = async (req, res) => {
 const createStudent = async (req, res) => {
     const { alunoId, codTurma, nomeTurma, nomeCompleto, nascimento } = req.body;
     const stu = await getStudentQuery({ alunoId });
-    console.log(stu)
     if (stu.length > 0)
         return res.status(400).send("Estudante já existe!")
     else if (!(alunoId && codTurma && nomeCompleto && nascimento))
@@ -105,8 +104,9 @@ const createStudent = async (req, res) => {
 const editStudent = async (req, res) => {
     const { alunoId, codTurma } = req.body;
 
+
     if (alunoId && codTurma) {
-        await createEstudante(req.body);
+        await editEstudante(alunoId, codTurma);
         return res.status(201).send("Aluno editado com sucesso!")
     }
     else
@@ -114,7 +114,7 @@ const editStudent = async (req, res) => {
 }
 
 const findStu = async (req, res) => {
-    const { alunoId } = req.body;
+    const { alunoId } = req.query;
     const stu = await getStudentQuery({ alunoId });
     if (stu.length > 0)
         return res.status(200).send(stu[0]);
