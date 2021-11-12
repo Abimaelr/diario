@@ -35,8 +35,8 @@ const editClass = async (req, res) => {
 
 const classByTeacher = async (req, res) => {
     const { authorization } = req.headers;
-    const { profId} = jwt.verify(authorization, pass);
-    const classes = await services.classByTeacher(profId)
+    const { userId } = jwt.verify(authorization, pass);
+    const classes = await services.classByTeacher(userId)
     return res.status(200).json({ classes })
 }
 

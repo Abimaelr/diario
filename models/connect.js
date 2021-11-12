@@ -1,8 +1,9 @@
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
-const MONGO_DB_URL =  process.env.MONGO_DB_URL || 'mongodb://localhost:27017/diarioEscolar';
+// const MONGO_DB_URL =  process.env.MONGO_DB_URL || 'mongodb://localhost:27017/diarioEscolar';
 // process.env.MONGO_DB_URL ||
+const MONGO_DB_URL = "mongodb+srv://pmjp:rsLyr5BqZHXXGmHe@diarioescolar.hdnz2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 const OPTIONS = {
     useNewUrlParser: true,
     useUnifiedTopology: true,

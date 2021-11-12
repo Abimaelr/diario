@@ -1,9 +1,9 @@
 const connect = require('./connect');
 
-const teachersId = async (profId) => {
+const teachersUserId = async (userId) => {
     const out = await  connect()
     .then((db) => db.collection('users')
-    .findOne({profId}))
+    .findOne({userId}))
     .then((result) => result);
     return out;
     };
@@ -57,5 +57,5 @@ const students = async () => {
 };
 
 module.exports = {
-    classesBySchool, classesByCode, students, classes, teachersId, createClass, editClass
+    classesBySchool, classesByCode, students, classes, teachersUserId, createClass, editClass
 }

@@ -1,4 +1,4 @@
-const { classesBySchool, classesByCode, students, classes, teachersId, createClass, editClass } = require("../models/classes");
+const { classesBySchool, classesByCode, students, classes, teachersId, createClass, editClass, teachersUserId } = require("../models/classes");
 
 const findClasses = async (userId) => {
     const classArr = await classesBySchool(userId);
@@ -28,8 +28,8 @@ const studentsByClass = async (codTurma) => {
     return studentsArr;
 }
 
-const classByTeacher = async (profId) => {
-    const prof = await teachersId(profId);
+const classByTeacher = async (userId) => {
+    const prof = await teachersUserId(userId);
     const classArr = await classes();
     const out = classArr.filter(sala => {
         if (prof.turmas.includes(sala.codTurma)) {
