@@ -16,7 +16,7 @@ app.use('/', dashboard);
 app.use('/classes', classes);
 app.use('/disciplinas', disciplinas);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port , ()=>{
     console.log('Ativo')
