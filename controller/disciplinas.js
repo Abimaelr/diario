@@ -89,6 +89,16 @@ const editBol = async (req, res) => {
     return res.status(200).json({ result });
 }
 
+const delDiario = async (req, res) => {
+    await user.delFreq(req.query);
+    return res.status(200).send("Frequência Excluída com Sucesso!");
+}
+
+const delBoletim = async (req, res) => {
+    await user.delBol(req.query);
+    return res.status(200).send("Boletim Excluída com Sucesso!");
+}
+
 const grade = async (req, res) => res.status(200).json(disciplinas);
 
 module.exports = {
@@ -102,5 +112,7 @@ module.exports = {
     readBol,
     grade,
     readBolQuery,
-    readDiarioQuery
+    readDiarioQuery,
+    delDiario,
+    delBoletim
 }

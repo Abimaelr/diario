@@ -56,7 +56,7 @@ const delFreq = async (query) => {
 }
 
 const delBol= async (query) => {
-    await diarios.remove(remv);
+    await boletim.remove(remv);
 }
 
 module.exports = {
