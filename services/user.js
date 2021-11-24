@@ -51,6 +51,13 @@ const editBoletim = async (remv, pack) => {
     return result;
 }
 
+const delFreq = async (query) => {
+    await diarios.remove(remv);
+}
+
+const delBol= async (query) => {
+    await diarios.remove(remv);
+}
 
 module.exports = {
     find,
@@ -63,5 +70,7 @@ module.exports = {
     readBoletim,
     editBoletim,
     findProfessores,
-    editTurmas
+    editTurmas,
+    delBol,
+    delFreq
 }

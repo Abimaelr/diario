@@ -33,6 +33,9 @@ router.route('/diarios')
         // permissionsDisciplina, 
         verifyConsistencia,
         editFrequ
+    )
+    .delete(
+        
     );
 
 router.route('/diario/q')
