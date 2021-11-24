@@ -96,7 +96,7 @@ const delDiario = async (req, res) => {
 
 const delBoletim = async (req, res) => {
     await user.delBol(req.query);
-    return res.status(200).send("Boletim Excluída com Sucesso!");
+    return res.status(200).send("Boletim Excluído com Sucesso!");
 }
 
 const grade = async (req, res) => res.status(200).json(disciplinas);

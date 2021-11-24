@@ -52,11 +52,11 @@ const editBoletim = async (remv, pack) => {
 }
 
 const delFreq = async (query) => {
-    await diarios.remove(remv);
+    await diarios.remove(query);
 }
 
 const delBol= async (query) => {
-    await boletim.remove(remv);
+    await boletim.remove(query);
 }
 
 module.exports = {
