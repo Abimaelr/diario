@@ -41,9 +41,13 @@ const editClass = async (req, res) => {
 
 const classByTeacher = async (req, res) => {
     const { authorization } = req.headers;
-    const { userId } = jwt.verify(authorization, pass);
-    const classes = await services.classByTeacher(userId)
-    return res.status(200).json({ classes })
+    try {
+        const { userId } = jwt.verify(authorization, pass);
+        const classes = await services.classByTeacher(userId)
+        return res.status(200).json({ classes })
+    } catch () {
+        return res.status(500).json({ message: "Erro!" })
+    }
 }
 
 const studentsClass = async (req, res) => {

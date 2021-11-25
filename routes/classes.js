@@ -9,52 +9,37 @@ const router = express.Router();
 router.route('/')
     .get(
         validateToken,
-        // validateUser,
         classes
     )
     .post(
         validateToken,
-        // validateUser,
         verifyData,
         verifyClasses,
         verifyPermissionCreate,
         createClasse
     )
-router.route('/c').
- get(
-    validateToken,
-    findClass
- )
-
-router.route('/p/')
+router.route('/c')
     .get(
         validateToken,
-        // validateUser,
+        findClass
+    )
+
+router.route('/p')
+    .get(
+        validateToken,
         classByTeacher
     )
 
 router.route('/students/:id')
     .get(
         validateToken,
-        // validateUser,
         studentsClass
     )
 
 router.route('/:id')
     .get(
         validateToken,
-        // validateUser,
         studentsClass
     )
-// router.route('/:id')
-//     .get(
-
-//     )
-//     .put(
-//         validateToken,
-//         validateUser,
-//         verifyPermission,
-//         editClass
-//     )
 
 module.exports = router;
