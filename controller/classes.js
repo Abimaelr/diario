@@ -45,7 +45,7 @@ const classByTeacher = async (req, res) => {
         const { userId } = jwt.verify(authorization, pass);
         const classes = await services.classByTeacher(userId)
         return res.status(200).json({ classes })
-    } catch () {
+    } catch (err) {
         return res.status(500).json({ message: "Erro!" })
     }
 }
