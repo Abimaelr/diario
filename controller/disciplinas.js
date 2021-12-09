@@ -5,7 +5,7 @@ const user = require('../services/user')
 
 const pass = "pMrdqRrHpSmS!GLD*^!oaWmk96OMO03vaUQcnYSKtuctA%&%G5";
 
-const read = async (req, res) => {
+const read = async(req, res) => {
     const { authorization } = req.headers;
     const { userId, permissions } = jwt.verify(authorization, pass);
     const result = await user.find(userId);
@@ -13,20 +13,20 @@ const read = async (req, res) => {
     return res.status(200).json({ disciplinas: result.disciplinas })
 }
 
-const edit = async (req, res) => {
+const edit = async(req, res) => {
     const { userId, disciplinas } = req.body;
     const result = await user.editDisciplinas({ userId, disciplinas });
     return res.status(201).json({ message: "Disciplinas editadas com sucesso!", result })
 }
 
-const readDiarios = async (req, res) => {
+const readDiarios = async(req, res) => {
     const { codTurma, data, disciplina } = req.query;
     const query = !data ? { codTurma, disciplina } : { codTurma, data, disciplina };
     const result = await user.readFreq(query);
     return res.status(200).json({ result });
 }
 
-const readDiarioQuery = async (req, res) => {
+const readDiarioQuery = async(req, res) => {
     const result = await user.readFreq(req.query);
     const out = result.reduce((acc, item) => {
         const { nomeCompleto, presenca } = item;
@@ -42,13 +42,13 @@ const readDiarioQuery = async (req, res) => {
     return res.status(200).json(out);
 }
 
-const writeFreq = async (req, res) => {
+const writeFreq = async(req, res) => {
     const frequencias = await req.body;
     const result = await user.writeFreq(frequencias.pack);
     return res.status(200).json({ result });
 }
 
-const editFrequ = async (req, res) => {
+const editFrequ = async(req, res) => {
     const frequencias = await req.body;
     const { codTurma, data, disciplina } = frequencias.pack[0];
     const query = { codTurma, data, disciplina };
@@ -56,14 +56,14 @@ const editFrequ = async (req, res) => {
     return res.status(200).json({ result });
 }
 
-const readBol = async (req, res) => {
+const readBol = async(req, res) => {
     const { codTurma, disciplina } = req.query;
     const query = { codTurma, "disciplina": disciplina };
     const result = await user.readBoletim(query);
     return res.status(200).json({ result });
 }
 
-const readBolQuery = async (req, res) => {
+const readBolQuery = async(req, res) => {
     const result = await user.readBoletim(req.query);
     console.log('opa')
     const out = result.reduce((acc, item) => {
@@ -75,31 +75,31 @@ const readBolQuery = async (req, res) => {
     return res.status(200).json(out);
 }
 
-const writeBol = async (req, res) => {
+const writeBol = async(req, res) => {
     const boletim = await req.body;
     const result = await user.writeBoletim(boletim.pack);
     return res.status(200).json({ result });
 }
 
-const editBol = async (req, res) => {
+const editBol = async(req, res) => {
     const boletim = await req.body;
-    const { idTurma, idProfessor, data, materia } = frequencias.pack[0];
+    const { idTurma, idProfessor, data, materia } = boletim.pack[0];
     const query = { idTurma, idProfessor, data, materia };
-    const result = await user.editBol(query, boletim.pack);
+    const result = await user.editBoletim(query, boletim.pack);
     return res.status(200).json({ result });
 }
 
-const delDiario = async (req, res) => {
+const delDiario = async(req, res) => {
     await user.delFreq(req.query);
     return res.status(200).send("Frequência Excluída com Sucesso!");
 }
 
-const delBoletim = async (req, res) => {
+const delBoletim = async(req, res) => {
     await user.delBol(req.query);
     return res.status(200).send("Boletim Excluído com Sucesso!");
 }
 
-const grade = async (req, res) => res.status(200).json(disciplinas);
+const grade = async(req, res) => res.status(200).json(disciplinas);
 
 module.exports = {
     edit,
