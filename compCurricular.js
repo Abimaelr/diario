@@ -71,5 +71,16 @@ module.exports = {
         { componente: "EJA - Ciclos 3 e 4", tipo: 'n', nome: "Língua Inglesa", ha: 2, cod: "eja2" },
         { componente: "EJA - Ciclos 3 e 4", tipo: 'n', nome: "Língua Portuguesa", ha: 5, cod: "eja2" },
         { componente: "EJA - Ciclos 3 e 4", tipo: 'n', nome: "Matemática", ha: 5, cod: "eja2" },
+    ],
+    "EJA - Alfa": [
+        { componente: "EJA - Alfa", tipo: 'c', nome: "Artes", ha: 2, cod: "eja2" },
+        { componente: "EJA - Alfa", tipo: 'c', nome: "Ciências", ha: 3, cod: "eja2" },
+        { componente: "EJA - Alfa", tipo: 'c', nome: "Educação Física", ha: 1, cod: "eja2" },
+        { componente: "EJA - Alfa", tipo: 'c', nome: "Ensino Religioso", ha: 1, cod: "eja2" },
+        { componente: "EJA - Alfa", tipo: 'c', nome: "Geografia", ha: 3, cod: "eja2" },
+        { componente: "EJA - Alfa", tipo: 'c', nome: "História", ha: 3, cod: "eja2" },
+        { componente: "EJA - Alfa", tipo: 'c', nome: "Língua Inglesa", ha: 2, cod: "eja2" },
+        { componente: "EJA - Alfa", tipo: 'c', nome: "Língua Portuguesa", ha: 5, cod: "eja2" },
+        { componente: "EJA - Alfa", tipo: 'c', nome: "Matemática", ha: 5, cod: "eja2" },
     ]
 }

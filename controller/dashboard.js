@@ -10,7 +10,7 @@ const basicInfo = (req, res) => {
     return res.status(200).json({ nome, permissions });
 }
 
-const updatePassword = async (req, res) => {
+const updatePassword = async(req, res) => {
     const { authorization } = req.headers;
     const { oldPass, newPass, confirm } = req.body;
     const { userId, password } = jwt.verify(authorization, pass);
@@ -23,7 +23,7 @@ const updatePassword = async (req, res) => {
     return res.status(201).json({ message: "Senha alterada!" });
 }
 
-const classes = async (req, res) => {
+const classes = async(req, res) => {
     const { authorization } = req.headers;
     const verify = jwt.verify(authorization, pass);
     const { userId } = verify;
@@ -31,7 +31,7 @@ const classes = async (req, res) => {
     return res.status(200).json({ classes })
 }
 
-const createClasse = async (req, res) => {
+const createClasse = async(req, res) => {
     const { authorization } = req.headers;
     const { codTurma, nomeTurma, turno } = req.body;
     const verify = jwt.verify(authorization, pass);
@@ -40,7 +40,7 @@ const createClasse = async (req, res) => {
     return res.status(200).json({ create })
 }
 
-const getTeachers = async (req, res) => {
+const getTeachers = async(req, res) => {
     const { authorization } = req.headers;
     const verify = jwt.verify(authorization, pass);
     const { userId } = verify;
@@ -48,7 +48,7 @@ const getTeachers = async (req, res) => {
     return res.status(200).json({ teacher })
 }
 
-const getStudents = async (req, res) => {
+const getStudents = async(req, res) => {
     const { authorization } = req.headers;
 
     const verify = jwt.verify(authorization, pass);
@@ -57,38 +57,40 @@ const getStudents = async (req, res) => {
     return res.status(200).json({ students })
 }
 
-const getStudent = async (req, res) => {
+const getStudent = async(req, res) => {
     const { alunoId } = req.params;
     const student = await getStudentQuery({ alunoId });
     return res.status(200).json({ student })
 }
 
-const getProfessores = async (req, res) => {
+const getProfessores = async(req, res) => {
     const { profId } = req.query;
 
     const professor = await users.findProfessores({ profId })
-    console.log(professor)
+    if (professor.length === 0) return res.status(200).json(null)
     return res.status(200).json(professor)
 }
 
-const createProfessor = async (req, res) => {
+const createProfessor = async(req, res) => {
     const { nome, userId, profId, turmas } = req.body;
     if (nome && userId && profId && turmas) {
-        await createProf(req.body);
+        const password = userId.split('@')[0] + '123';
+        const disciplinas = [];
+        const payload = { nome, userId, profId, turmas, disciplinas, password }
+        await createProf(payload);
         return res.status(201).send("Professor criado com sucesso!")
-    }
-    else
+    } else
         return res.status(400).send("Campos incompletos!")
 }
 
-const editProf = async (req, res) => {
+const editProf = async(req, res) => {
     const { userId, turmas, profId } = req.body;
-    const result = await users.editTurmas({ userId, turmas, profId });
-    console.log(result)
-    return res.status(201).json({ message: "Turmas editadas com sucesso!", result })
+    const password = userId.split('@')[0] + '123';
+    const result = await users.editTurmas({ userId, turmas, profId, password });
+    return res.status(201).json({ message: "Professor Editado com Sucesso!", result })
 };
 
-const createStudent = async (req, res) => {
+const createStudent = async(req, res) => {
     const { alunoId, codTurma, nomeTurma, nomeCompleto, nascimento } = req.body;
     const stu = await getStudentQuery({ alunoId });
     if (stu.length > 0)
@@ -101,19 +103,18 @@ const createStudent = async (req, res) => {
     }
 }
 
-const editStudent = async (req, res) => {
+const editStudent = async(req, res) => {
     const { alunoId, codTurma } = req.body;
 
 
     if (alunoId && codTurma) {
         await editEstudante(alunoId, codTurma);
         return res.status(201).send("Aluno editado com sucesso!")
-    }
-    else
+    } else
         return res.status(400).send("Campos incompletos!")
 }
 
-const findStu = async (req, res) => {
+const findStu = async(req, res) => {
     const { alunoId } = req.query;
     const stu = await getStudentQuery({ alunoId });
     if (stu.length > 0)

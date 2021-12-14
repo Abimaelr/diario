@@ -1,6 +1,6 @@
 const connect = require('./connect');
 
-const findUser = async (userId) => {
+const findUser = async(userId) => {
     const out = await connect()
         .then((db) => db.collection('users')
             .findOne({ userId }))
@@ -8,7 +8,7 @@ const findUser = async (userId) => {
     return out;
 };
 
-const findUsers = async (query) => {
+const findUsers = async(query) => {
     const out = await connect()
         .then((db) => db.collection('users')
             .find(query).toArray())
@@ -16,7 +16,7 @@ const findUsers = async (query) => {
     return out;
 };
 
-const edit = async ({ userId, disciplinas }) => {
+const edit = async({ userId, disciplinas }) => {
     const out = await connect()
         .then((db) => db.collection('users')
             .updateOne({ userId }, { $set: { disciplinas } }))
@@ -24,17 +24,16 @@ const edit = async ({ userId, disciplinas }) => {
     return out;
 };
 
-const editTurmas = async ({ userId, turmas, profId }) => {
+const editTurmas = async({ profId, turmas, userId, password }) => {
     const out = await connect()
         .then((db) => db.collection('users')
-            .updateOne({ userId }, { $set: { turmas, profId } }))
+            .updateOne({ profId }, { $set: { turmas, userId, password } }))
         .then((result) => result);
     return out;
 };
 
-const create = async (data) => connect().
-    then((db) => db.collection('users').
-        insertOne(data).then(result => result))
+const create = async(data) => connect().
+then((db) => db.collection('users').insertOne(data).then(result => result))
 
 module.exports = {
     findUser,
