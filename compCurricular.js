@@ -51,15 +51,15 @@ module.exports = {
         { componente: "6° ao 9° Ano - Ens. Fundamental", tipo: 'n', nome: "Matemática", ha: 5, cod: "f2" }
     ],
     "EJA - Ciclos 1 e 2": [
-        { componente: "EJA - Ciclos 1 e 2", tipo: 'n', nome: "Artes", ha: 1, cod: "eja1" },
+        { componente: "EJA - Ciclos 1 e 2", tipo: 'c', nome: "Artes", ha: 1, cod: "eja1" },
         { componente: "EJA - Ciclos 1 e 2", tipo: 'n', nome: "Ciências", ha: 1, cod: "eja1" },
-        { componente: "EJA - Ciclos 1 e 2", tipo: 'n', nome: "Educação Física", ha: 1, cod: "eja1" },
-        { componente: "EJA - Ciclos 1 e 2", tipo: 'n', nome: "Ensino Religioso", ha: 1, cod: "eja1" },
+        { componente: "EJA - Ciclos 1 e 2", tipo: 'c', nome: "Educação Física", ha: 1, cod: "eja1" },
+        { componente: "EJA - Ciclos 1 e 2", tipo: 'c', nome: "Ensino Religioso", ha: 1, cod: "eja1" },
         { componente: "EJA - Ciclos 1 e 2", tipo: 'n', nome: "Geografia", ha: 1, cod: "eja1" },
         { componente: "EJA - Ciclos 1 e 2", tipo: 'n', nome: "História", ha: 2, cod: "eja1" },
         { componente: "EJA - Ciclos 1 e 2", tipo: 'n', nome: "Língua Portuguesa", ha: 4, cod: "eja1" },
         { componente: "EJA - Ciclos 1 e 2", tipo: 'n', nome: "Matemática", ha: 3, cod: "eja1" },
-        { componente: "EJA - Ciclos 1 e 2", tipo: 'n', nome: "Qualificação Profissional", ha: 1, cod: "eja1" },
+        { componente: "EJA - Ciclos 1 e 2", tipo: 'c', nome: "Qualificação Profissional", ha: 1, cod: "eja1" },
     ],
     "EJA - Ciclos 3 e 4": [
         { componente: "EJA - Ciclos 3 e 4", tipo: 'n', nome: "Artes", ha: 2, cod: "eja2" },
