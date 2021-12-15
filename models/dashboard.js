@@ -72,7 +72,7 @@ const createStudent = async(student) => {
     return out;
 };
 
-const editStudent = async({ alunoId, codTurma }) => {
+const editStudent = async(alunoId, codTurma) => {
     const out = await connect()
         .then((db) => db.collection('alunos')
             .updateOne({ alunoId }, { $set: { codTurma } }))
